@@ -1,0 +1,145 @@
+## YAML Template.
+---
+options:                            { type: InnoDB, collate: utf8_unicode_ci, charset: utf8 }
+
+constantes:
+  comment:                          Constantes base de categorias y tipos
+  actAs:
+    Sluggable:                      { fields: [ titulo, tipo ], unique: true }
+    Timestampable:
+      created:                      { name: created_at, type: timestamp, format: Y-m-d H:i:s }
+      updated:                      { name: updated_at, type: timestamp, format: Y-m-d H:i:s }
+  columns:
+    id:                             { type: integer, primary: true, autoincrement: true }
+    titulo:                         { type: varchar(255) }
+    descripcion:                    { type: clob }
+    imagen:                         { type: varchar(255) }
+    activo:                         { type: boolean, default: true }
+
+sfGuardUserBululu:
+  actAs:
+    Timestampable:
+      created:                      { name: created_at, type: timestamp, format: Y-m-d H:i:s }
+      updated:                      { name: updated_at, type: timestamp, format: Y-m-d H:i:s }
+  columns:
+    id:                             { type: integer, primary: true, autoincrement: true }
+    unique_id:                      { type: varchar(255) }
+    user_id:                        { type: integer }
+    foto_avatar:                    { type: varchar(255) }
+    fecha_nacimiento:               { type: date }
+    sexo_id:                        { type: integer, comment: genero / Masculino - Femenino - Otro }
+    profesion:                      { type: varchar(255) }
+    video_url:                      { type: varchar(255) }
+    pais_id:                        { type: integer }
+    estado_id:                      { type: integer }
+  relations:
+    sfGuardUser:                    { local: user_id, foreign: id, type: one, foreignType: one, foreignAlias: SibeliusfestUser }
+    sexos:                          { local: sexo_id, foreign: id, onDelete: CASCADE, onUpdate: CASCADE }
+    paises:                         { local: pais_id, foreign: id, onDelete: CASCADE, onUpdate: CASCADE }
+    estados:                        { local: estado_id, foreign: id, onDelete: CASCADE, onUpdate: CASCADE }
+
+perfilesContactos:
+  columns:
+    perfil_id:                      { type: integer, primary: true }
+    tipo_contacto_id:               { type: integer, primary: true }
+    valor:                          { type: varchar(255) }
+  relations:
+    sfGuardUserBululu:              { local: perfil_id, foreign: id, onDelete: CASCADE, onUpdate: CASCADE }
+    tiposContactos:                 { local: tipo_contacto_id, foreign: id, onDelete: CASCADE, onUpdate: CASCADE }
+
+comunidades:
+  actAs:
+    Timestampable:
+      created:                      { name: created_at, type: timestamp, format: Y-m-d H:i:s }
+      updated:                      { name: updated_at, type: timestamp, format: Y-m-d H:i:s }
+  columns:
+    id:                             { type: integer, primary: true, autoincrement: true }
+    unique_id:                      { type: varchar(255) }
+    feedback_id:                    { type: integer, default: 0 }
+    perfil_id:                      { type: integer }
+    pais_id:                        { type: integer }
+    estado_id:                      { type: integer }
+    avatar:                         { type: varchar(255) }
+    titulo:                         { type: varchar(255) }
+    descripcion:                    { type: clob }
+  relations:
+    sfGuardUserBululu:              { local: perfil_id, foreign: id, onDelete: CASCADE, onUpdate: CASCADE }
+    comunidades:                    { local: feedback_id, foreign: id, onDelete: CASCADE, onUpdate: CASCADE }
+    paises:                         { local: pais_id, foreign: id, onDelete: CASCADE, onUpdate: CASCADE }
+    estados:                        { local: estado_id, foreign: id, onDelete: CASCADE, onUpdate: CASCADE }
+
+perfilesFeed:
+  comment:
+  actAs:
+    Sluggable:                      { fields: [ titulo ], unique: true }
+    Timestampable:
+      created:                      { name: created_at, type: timestamp, format: Y-m-d H:i:s }
+      updated:                      { name: updated_at, type: timestamp, format: Y-m-d H:i:s }
+  columns:
+    id:                             { type: integer, primary: true, autoincrement: true }
+    unique_id:                      { type: varchar(255) }
+    feedback_id:                    { type: integer, default: 0 }
+    perfil_id:                      { type: integer }
+    descripcion:                    { type: clob }
+  relations:
+    sfGuardUserBululu:              { local: perfil_id, foreign: id, onDelete: CASCADE, onUpdate: CASCADE }
+    perfilesFeed:                   { local: feedback_id, foreign: id, onDelete: CASCADE, onUpdate: CASCADE }
+
+perfilesFollow:
+  columns:
+    perfil_id:                      { type: integer, primary: true }
+    follow_id:                      { type: integer, primary: true }
+  relations:
+    sfGuardUserBululu:              { local: perfil_id, foreign: id, onDelete: CASCADE, onUpdate: CASCADE }
+    sfGuardUserBululu:              { local: follow_id, foreign: id, onDelete: CASCADE, onUpdate: CASCADE }
+
+sexos:
+  comment:                          sexos Hombre Mujer Otros
+  inheritance:                      { type: column_aggregation, extends: constantes, keyField: tipo, keyValue: SEX }
+
+catComunidades:
+  comment:                          Categorias de comunidades
+  inheritance:                      { type: column_aggregation, extends: constantes, keyField: tipo, keyValue: CATCOM }
+
+tiposContactos:
+  comment:                          Categorias de comunidades
+  inheritance:                      { type: column_aggregation, extends: constantes, keyField: tipo, keyValue: TIPCON }
+
+paises:
+  comment:                          Paises
+  actAs:
+    Sluggable:                      { fields: [ titulo ], unique: true }
+    Timestampable:
+      created:                      { name: created_at, type: timestamp, format: Y-m-d H:i:s }
+      updated:                      { name: updated_at, type: timestamp, format: Y-m-d H:i:s }
+  columns:
+    id:                             { type: integer, primary: true, autoincrement: true }
+    titulo:                         { type: varchar(255) }
+    imagen:                         { type: varchar(255) }
+    iso2:                           { type: varchar(2) }
+    iso3:                           { type: varchar(3) }
+    codigo:                         { type: integer }
+    cultura:                        { type: varchar(10) }
+    activo:                         { type: boolean, default: true }
+    by_admin:                       { type: boolean, default: false }
+    created_by:                     { type: integer }
+    updated_by:                     { type: integer }
+
+estados:
+  comment:                          Estados
+  actAs:
+    Sluggable:                      { fields: [ titulo ], unique: true }
+    Timestampable:
+      created:                      { name: created_at, type: timestamp, format: Y-m-d H:i:s }
+      updated:                      { name: updated_at, type: timestamp, format: Y-m-d H:i:s }
+  columns:
+    id:                             { type: integer, primary: true, autoincrement: true }
+    titulo:                         { type: varchar(255) }
+    pais_id:                        { type: integer}
+    activo:                         { type: boolean, default: true }
+    by_admin:                       { type: boolean, default: false }
+    created_by:                     { type: integer }
+    updated_by:                     { type: integer }
+  relations:
+    paises:                         { local: pais_id, foreign: id, onDelete: CASCADE, onUpdate: CASCADE }
+

@@ -1,0 +1,6 @@
+
+all:
+  stylesheets:
+    - landing.css
+
+  layout:         landing

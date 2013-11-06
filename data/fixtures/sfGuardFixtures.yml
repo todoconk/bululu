@@ -1,0 +1,29 @@
+## YAML Template.
+---
+sfGuardGroup:
+  sfGuardGroup_1:                   { name: admin, description: 'Administrator group' }
+  sfGuardGroup_2:                   { name: commonGroup, description: 'Common group' }
+
+sfGuardPermission:
+  sfGuardPermission_1:              { name: admin, description: 'Administrator permission' }
+  sfGuardPermission_2:              { name: common, description: 'Common permission' }
+  
+sfGuardGroupPermission:
+  sfGuardGroupPermission_1_1:       { Group: sfGuardGroup_1, Permission: sfGuardPermission_1 }
+  sfGuardGroupPermission_2_2:       { Group: sfGuardGroup_2, Permission: sfGuardPermission_2 }
+  
+sfGuardUserGroup:
+  sfGuardUserGroup_1_1:             { User: sfGuardUser_1, Group: sfGuardGroup_1 }
+
+sfGuardUser:
+  sfGuardUser_1:
+    first_name: Krikor
+    last_name: Krikorian
+    email_address: krikorian84@gmail.com
+    username: todoconk
+    algorithm: sha1
+    salt: 1dd34125ecc9c5bfd53d8e3a2e387027
+    password: bululu
+    is_active: true
+    is_super_admin: true 
+

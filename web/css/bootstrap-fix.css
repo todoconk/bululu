@@ -1,0 +1,21 @@
+
+.navbar-inner{
+  background-color: #f5891f;
+  background-image: linear-gradient(to bottom, #f5891f, #f5891f);
+}
+.brand, .nav > li > a{
+  color: white !important;
+}
+
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus{
+  background-color: #f5891f;
+}
+.navbar .nav > li{
+  line-height: 40px;
+}
+.navbar-inner .btn-link{
+  color: white;
+}
+.media-body p{
+  margin: 0;
+}

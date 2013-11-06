@@ -1,0 +1,53 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: landing, action: index }
+
+home:
+  url: /home
+  param: { module: perfil, action: index }
+
+# Personas
+personasList:
+  url:  /personas
+  param: { module: personas, action: index }
+
+personasDetail:
+  url:  /personas/:unique_id
+  param: { module: personas, action: detalles }
+
+# Comunidades
+comunidadesList:
+  url: /comunidades
+  param: { module: comunidades, action: index }
+
+comunidadesCategorias:
+  url: /comunidades/:categorias
+  param: { module: comunidades, action: categorias }
+
+comunidadesDetalles:
+  url: /comunidades/:categorias/:unique_id
+  param: { module: comunidades, action: detalles }
+
+
+
+sf_guard_signin:
+  url:            /:sf_culture/login
+  param:          { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:            /:sf_culture/salir
+  param:          { module: sfGuardAuth, action: signout }
+
+sf_guard_password:
+  url:            /:sf_culture/recuperar-password
+  param:          { module: sfGuardForgotPassword }
+
+sf_guard_register:
+  #url:            /:sf_culture/cuentas/registro
+  url:            /cuentas/registro
+  param:          { module: cuentas, action: index }
+

@@ -1,0 +1,14 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+# default values
+all:
+  sf_guard_plugin:
+    allow_login_with_email: true
+
+  sf_guard_plugin_default:
+    from_email:
+      #noresponder@sibeliusfest.com : Sibelius Fest
+      webmaster@sibeliusfest.com : Sibelius Fest
+  sf_guard_plugin_default_subject: Recuperacion de clave para
+  sf_guard_plugin_default_confirm_change: Nueva Contraseña para

@@ -1,0 +1,19 @@
+<?php
+$paes = array(
+"EEUU" => array("Alabama", "Alaska", "Arizona", "Arkansas", "California", "Carolina del Norte", "Carolina del Sur", "Colorado", "Connecticut", "Dakota del Norte", "Dakota del Sur", "Delaware", "Florida", "Georgia", "Hawái", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Luisiana", "Maine", "Maryland", "Massachusetts", "Míchigan", "Minnesota", "Misisipi", "Misuri", "Montana", "Nebraska", "Nevada", "Nueva Jersey", "Nueva York", "Nuevo Hampshire", "Nuevo México", "Ohio", "Oklahoma", "Oregón", "Pensilvania", "Rhode Island", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Virginia Occidental", "Washington", "Wisconsin", "Wyoming"),
+);
+?>
+paises:
+<?php foreach($paes as $k => $v) : ?>
+  <?php echo $k.": \n"; ?>
+    titulo: <?php echo $k."\n"; ?>
+<?php endforeach; ?>
+
+estados:
+<?php $r = 0; foreach($paes as $k => $v) : ?>
+<?php for($i=0; $i < count($v); $i++) : ?>
+  <?php echo $r.": \n"; ?>
+    paises: [ <?php echo $k; ?> ]
+    titulo: <?php echo $v[$i]."\n"; ?>
+<?php $r++; endfor; ?>
+<?php endforeach; ?>

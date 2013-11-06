@@ -1,0 +1,35 @@
+sfGuardUser:
+  User_admin:
+    first_name:     John
+    last_name:      Doe
+    email_address:  john.doe@gmail.com
+    username:       admin
+    password:       admin
+    is_super_admin: true
+    Groups:         [Group_admin]
+  User_common:
+    first_name:     Doris
+    last_name:      Seafish
+    email_address:  doris.seafish@gmail.com
+    username:       user
+    password:       common
+    is_super_admin: false
+    Groups:         [Group_common]
+
+sfGuardGroup:
+  Group_admin:
+    name:           admin
+    description:    Administrator group
+    Permissions:    [Permission_admin]
+  Group_common:
+    name:           common
+    description:    Common group
+    Permissions:    [Permission_common]
+
+sfGuardPermission:
+  Permission_admin:
+    name:           admin
+    description:    Administrator permission
+  Permission_common:
+    name:           common
+    description:    Common permission
